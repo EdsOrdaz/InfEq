@@ -1,0 +1,601 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{356F4401-4878-4A11-A97D-B3606A2BA166}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>InfEq</RootNamespace>
+    <AssemblyName>InfEq</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>unne.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GemBox.Document, Version=29.0.35.1167, Culture=neutral, PublicKeyToken=b1b72c69714d4847, processorArchitecture=MSIL">
+      <HintPath>..\packages\GemBox.Document.29.0.0.1167\lib\net35\GemBox.Document.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.AWT.WinForms, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.AWT.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Beans, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Beans.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Charsets, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Charsets.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Cldrdata, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Cldrdata.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Corba, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Corba.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Core, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Jdbc, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Jdbc.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Localedata, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Localedata.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Management, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Management.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Media, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Media.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Misc, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Misc.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Naming, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Naming.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Nashorn, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Nashorn.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Remoting, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Remoting.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Security, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.SwingAWT, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.SwingAWT.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Text, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Tools, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Tools.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Util, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.Util.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.XML.API, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.XML.API.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.XML.Bind, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.XML.Bind.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.XML.Crypto, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.XML.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.XML.Parse, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.XML.Parse.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.XML.Transform, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.XML.Transform.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.XML.WebServices, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.XML.WebServices.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.XML.XPath, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.OpenJDK.XML.XPath.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.Runtime, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.Runtime.JNI, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.1.5717.0\lib\IKVM.Runtime.JNI.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.1, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.1\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.xmlworker, Version=5.5.13.1, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itextsharp.xmlworker.5.5.13.1\lib\itextsharp.xmlworker.dll</HintPath>
+    </Reference>
+    <Reference Include="messageboxmanager">
+      <HintPath>..\..\..\Downloads\messageboxmanager.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel1">
+      <HintPath>..\..\..\..\..\..\WINDOWS\assembly\GAC_MSIL\Microsoft.Office.Interop.Excel\15.0.0.0__71e9bce111e9429c\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="About.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="About.Designer.cs">
+      <DependentUpon>About.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AgregarUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AgregarUsuario.Designer.cs">
+      <DependentUpon>AgregarUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Buscar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Buscar.Designer.cs">
+      <DependentUpon>Buscar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Buscar_Correo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Buscar_Correo.Designer.cs">
+      <DependentUpon>Buscar_Correo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CargandoDatos_a_BD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CargandoDatos_a_BD.Designer.cs">
+      <DependentUpon>CargandoDatos_a_BD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CargandoEmpleados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CargandoEmpleados.Designer.cs">
+      <DependentUpon>CargandoEmpleados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Configurar_correo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Configurar_correo.Designer.cs">
+      <DependentUpon>Configurar_correo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CrearPDF.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CrearPDF.Designer.cs">
+      <DependentUpon>CrearPDF.cs</DependentUpon>
+    </Compile>
+    <Compile Include="database.cs" />
+    <Compile Include="Datos.cs" />
+    <Compile Include="DeleteID.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DeleteID.Designer.cs">
+      <DependentUpon>DeleteID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DeleteView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DeleteView.Designer.cs">
+      <DependentUpon>DeleteView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditarUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditarUsuario.Designer.cs">
+      <DependentUpon>EditarUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inicio.Designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KeyDecoder.cs" />
+    <Compile Include="Listausuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listausuarios.Designer.cs">
+      <DependentUpon>Listausuarios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="login.Designer.cs">
+      <DependentUpon>login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="login_load.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="login_load.Designer.cs">
+      <DependentUpon>login_load.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MacAddress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MacAddress.Designer.cs">
+      <DependentUpon>MacAddress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NombrePC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NombrePC.Designer.cs">
+      <DependentUpon>NombrePC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NumActivo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NumActivo.Designer.cs">
+      <DependentUpon>NumActivo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NumActivo_Check.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NumActivo_Check.Designer.cs">
+      <DependentUpon>NumActivo_Check.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Prueba.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Prueba.Designer.cs">
+      <DependentUpon>Prueba.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Repetido.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Repetido.Designer.cs">
+      <DependentUpon>Repetido.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReporteMensual.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReporteMensual.Designer.cs">
+      <DependentUpon>ReporteMensual.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportInfEq.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportInfEq.Designer.cs">
+      <DependentUpon>ReportInfEq.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sirac.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sirac.Designer.cs">
+      <DependentUpon>Sirac.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubirArchivos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubirArchivos.Designer.cs">
+      <DependentUpon>SubirArchivos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubirXML.cs" />
+    <Compile Include="Usuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Usuario.Designer.cs">
+      <DependentUpon>Usuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ver.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ver.Designer.cs">
+      <DependentUpon>Ver.cs</DependentUpon>
+    </Compile>
+    <Compile Include="xml.cs" />
+    <EmbeddedResource Include="About.resx">
+      <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AgregarUsuario.resx">
+      <DependentUpon>AgregarUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Buscar.resx">
+      <DependentUpon>Buscar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Buscar_Correo.resx">
+      <DependentUpon>Buscar_Correo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CargandoDatos_a_BD.resx">
+      <DependentUpon>CargandoDatos_a_BD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CargandoEmpleados.resx">
+      <DependentUpon>CargandoEmpleados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Configurar_correo.resx">
+      <DependentUpon>Configurar_correo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CrearPDF.resx">
+      <DependentUpon>CrearPDF.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DeleteID.resx">
+      <DependentUpon>DeleteID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DeleteView.resx">
+      <DependentUpon>DeleteView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditarUsuario.resx">
+      <DependentUpon>EditarUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listausuarios.resx">
+      <DependentUpon>Listausuarios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="login.resx">
+      <DependentUpon>login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="login_load.resx">
+      <DependentUpon>login_load.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MacAddress.resx">
+      <DependentUpon>MacAddress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NombrePC.resx">
+      <DependentUpon>NombrePC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NumActivo.resx">
+      <DependentUpon>NumActivo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NumActivo_Check.resx">
+      <DependentUpon>NumActivo_Check.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Prueba.resx">
+      <DependentUpon>Prueba.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Repetido.resx">
+      <DependentUpon>Repetido.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReporteMensual.resx">
+      <DependentUpon>ReporteMensual.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportInfEq.resx">
+      <DependentUpon>ReportInfEq.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sirac.resx">
+      <DependentUpon>Sirac.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubirArchivos.resx">
+      <DependentUpon>SubirArchivos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Usuario.resx">
+      <DependentUpon>Usuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ver.resx">
+      <DependentUpon>Ver.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="word\orden.docx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\unnelogo.jpg" />
+    <None Include="Resources\xml.png" />
+    <None Include="Resources\orden.png" />
+    <None Include="Resources\orden1.png" />
+    <None Include="Resources\orden2.png" />
+    <None Include="Resources\up.png" />
+    <None Include="Resources\reload.png" />
+    <None Include="Resources\tenor.gif" />
+    <None Include="Resources\cargando.gif" />
+    <None Include="Resources\Sin título-1.png" />
+    <None Include="Resources\orden3.png" />
+    <None Include="Resources\cargar.png" />
+    <None Include="Resources\reload1.png" />
+    <None Include="Resources\buscar.png" />
+    <None Include="Resources\excel.png" />
+    <None Include="Resources\regresar.png" />
+    <None Include="Resources\pdf.png" />
+    <None Include="Resources\reportemensual.png" />
+    <None Include="Resources\guardar.png" />
+    <None Include="Resources\login.png" />
+    <None Include="Resources\listausuario.png" />
+    <None Include="Resources\agregarusuario.png" />
+    <None Include="Resources\cerrarsesion.png" />
+    <None Include="Resources\subirxml.png" />
+    <None Include="Resources\firma.png" />
+    <None Include="Resources\firm.png" />
+    <None Include="Resources\logoprograma.jpg" />
+    <None Include="Resources\unne inicio.png" />
+    <None Include="Resources\firma2.png" />
+    <None Include="Resources\SIRAC.png" />
+    <None Include="Resources\ok.png" />
+    <None Include="Resources\tt.gif" />
+    <None Include="Resources\report.png" />
+    <None Include="Resources\report1.png" />
+    <None Include="Resources\instalar.png" />
+    <None Include="Resources\detener.png" />
+    <None Include="Resources\reporte.png" />
+    <None Include="Resources\back.png" />
+    <None Include="Resources\back1.png" />
+    <None Include="Resources\save2.png" />
+    <None Include="Resources\excel2.png" />
+    <None Include="Resources\reset2.png" />
+    <None Include="Resources\reset3.png" />
+    <None Include="Resources\search2.png" />
+    <None Include="Resources\sendemail.png" />
+    <None Include="Resources\nube.png" />
+    <None Include="Resources\xml2.png" />
+    <None Include="Resources\login2.png" />
+    <None Include="Resources\listausers.png" />
+    <None Include="Resources\adduser.png" />
+    <None Include="Resources\loggoff.png" />
+    <None Include="Resources\delete.png" />
+    <None Include="Resources\ver.png" />
+    <None Include="Resources\xmlupload.png" />
+    <None Include="Resources\reset21.png" />
+    <None Include="Resources\reset4.png" />
+    <None Include="Resources\loading.gif" />
+    <None Include="Resources\transparente progressbar.png" />
+    <None Include="Resources\loading1.gif" />
+    <None Include="Resources\gif2.gif" />
+    <None Include="Resources\Loading_2.gif" />
+    <None Include="Resources\loader.gif" />
+    <None Include="Resources\UnfoldedLimitedEasteuropeanshepherd-small.gif" />
+    <None Include="Resources\DisgustingSpiffyIguana-small.gif" />
+    <None Include="Resources\loginload.gif" />
+    <None Include="Resources\firma1.png" />
+    <None Include="Resources\ordernmantenimiento.png" />
+    <None Include="Resources\bd.png" />
+    <None Include="Resources\loadusers.gif" />
+    <None Include="Resources\load_balls.gif" />
+    <None Include="Resources\load_save.gif" />
+    <None Include="Resources\pic_pc.png" />
+    <None Include="Resources\graficas_reportes.png" />
+    <None Include="Resources\configurarcorreos.png" />
+    <Content Include="unne.ico" />
+    <None Include="Resources\pcunne.png" />
+    <Content Include="img\unne.png" />
+    <Content Include="pcunne.ico" />
+    <None Include="Resources\corporativo.png" />
+    <None Include="Resources\unne.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 y x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Outlook">
+      <Guid>{00062FFF-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>9</VersionMajor>
+      <VersionMinor>5</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
