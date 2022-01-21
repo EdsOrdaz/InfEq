@@ -250,7 +250,7 @@ namespace InfEq
             toolreset.SetToolTip(reset, "Resetear campos de busqueda");
 
             topdies = "TOP 10 ";
-            backgroundWorker1.RunWorkerAsync();
+            buscardetalle.PerformClick();
         }
 
         private void Regresar_Click(object sender, EventArgs e)
@@ -592,7 +592,7 @@ namespace InfEq
             {
                 foreach(String[] dat in lista)
                 {
-                    equipos.Rows.Add(dat[0], dat[1], dat[2], dat[3], dat[4], dat[5], dat[6], dat[7], dat[8], dat[9], dat[10], dat[11], dat[12], dat[13], dat[14], dat[15], dat[16], dat[17], dat[18], dat[19], dat[20], dat[21], dat[22], dat[23], dat[24], dat[25]);
+                    equipos.Rows.Add(dat[0], dat[1], dat[2], dat[3], dat[4], dat[5], dat[6], dat[7], dat[8], dat[9], dat[10], dat[11], dat[12], dat[13], dat[14], dat[15], dat[16], dat[17], dat[18], dat[19], dat[20], dat[21], dat[22], dat[23], dat[24], dat[25], dat[26]);
                 }
             }
             progressBar1.Hide();
@@ -624,85 +624,82 @@ namespace InfEq
         private void Bwexcel_DoWork(object sender, DoWorkEventArgs e)
         {
             suma = 1;
-            Microsoft.Office.Interop.Excel.Application aplicacion;
-            Microsoft.Office.Interop.Excel.Workbook libros_trabajo;
-            Microsoft.Office.Interop.Excel.Worksheet hoja_trabajo;
-            aplicacion = new Microsoft.Office.Interop.Excel.Application();
-            libros_trabajo = aplicacion.Workbooks.Add();
-            hoja_trabajo =
-                (Microsoft.Office.Interop.Excel.Worksheet)libros_trabajo.Worksheets.get_Item(1);
-            
-            for (int i = 1; i < equipos.Columns.Count + 1; i++)
+            Double bar = 100;
+            Double cont = Convert.ToDouble(equipos.Rows.Count);
+            Double progreso = (bar / cont);
+            Double cuenta = progreso;
+
+            Microsoft.Office.Interop.Excel.Application aplicacion = new Microsoft.Office.Interop.Excel.Application();
+            Workbook librosTrabajo = aplicacion.Workbooks.Add(XlWBATemplate.xlWBATWorksheet);
+            Worksheet hojaTrabajo = (Worksheet)librosTrabajo.Worksheets.get_Item(1);
+            int iCol = 1;
+            foreach (DataGridViewColumn column in equipos.Columns)
             {
-                hoja_trabajo.Cells[1, i].Borders.LineStyle = XlLineStyle.xlContinuous;
-                hoja_trabajo.Cells[1, i].interior.color = Color.Gray;
-                hoja_trabajo.Cells[1, i].font.color = Color.White;
-                hoja_trabajo.Cells[1, i].EntireRow.Font.Bold = true;
-                hoja_trabajo.Cells[1, i] = equipos.Columns[i - 1].HeaderText;
-            }
-            
-
-
-            this.Invoke((MethodInvoker)delegate {
-                //pictureBox1.Hide();
-                //equipos.Show();
-            });
-            String macs = "";
-
-            if (lista.Any())
-            {
-                int u = 0;
-                Double bar = 100;
-                Double cont = Convert.ToDouble(lista.Count);
-                Double progreso = (bar / cont);
-                Double cuenta = progreso;
-                foreach (String[] row in lista)
+                if (column.Visible)
                 {
-                    bwexcel.ReportProgress(Convert.ToInt32(cuenta));
-                    Console.WriteLine(cuenta);
-                    for (int j = 0; j < equipos.Columns.Count; j++)
-                    {
-                        hoja_trabajo.Cells[u + 2, j + 1].Borders.LineStyle = XlLineStyle.xlContinuous;
-                        hoja_trabajo.Cells[u + 2, j + 1].RowHeight = 15;
-                        if (j == 25)
-                        {
-                            hoja_trabajo.Cells[u + 2, j + 1] = row[26];
-                        }
-                        else if(j == 8)
-                        {
-                            hoja_trabajo.Cells[u + 2, j + 1] = row[j] + " MB";
-                        }
-                        else if(j == 9 || j == 10)
-                        {
-                            hoja_trabajo.Cells[u + 2, j + 1] = row[j] + " GB";
-                        }
-                        else if(j == 20)
-                        {
-                            hoja_trabajo.Cells[u + 2, j + 1] = DateTime.Parse(row[20]);
-                        }
-                        else if(j == 22)
-                        {
-                            hoja_trabajo.Cells[u + 2, j + 1] = DateTime.Parse(row[22]);
-                        }
-                        else
-                        {
-                            hoja_trabajo.Cells[u + 2, j + 1] = row[j];
-                        }
-                    }
-                    u++;
-                    cuenta += progreso;
+                    hojaTrabajo.Cells[1, iCol] = column.HeaderText;
+                    hojaTrabajo.Cells[1, iCol].Borders.LineStyle = XlLineStyle.xlContinuous;
+                    //hojaTrabajo.Cells[1, iCol].interior.color = Color.Gray;
+                    //hojaTrabajo.Cells[1, iCol].font.color = Color.White;
+                    hojaTrabajo.Cells[1, iCol].EntireRow.Font.Bold = true;
+                    ++iCol;
                 }
             }
 
-            libros_trabajo.SaveAs(fichero.FileName,
-                Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookNormal);
-            libros_trabajo.Close(true);
+            for (int i = 0; i < equipos.Rows.Count; i++)
+            {
+                bwexcel.ReportProgress(Convert.ToInt32(cuenta));
+                for (int j = 0; j < equipos.Columns.Count; j++)
+                {
+                    if (j == 26)
+                    {
+                        continue;
+                    }
+                    hojaTrabajo.Cells[i + 2, j + 1].Borders.LineStyle = XlLineStyle.xlContinuous;
+                    hojaTrabajo.Cells[i + 2, j + 1].RowHeight = 15;
+                    if (j == 8)
+                    {
+                        hojaTrabajo.Cells[i + 2, j + 1] = equipos.Rows[i].Cells[j].Value.ToString()+" MB";
+                    }
+                    else if (j == 9 || j == 10)
+                    {
+                        hojaTrabajo.Cells[i + 2, j + 1] = equipos.Rows[i].Cells[j].Value.ToString()+" GB";
+                    }
+                    else if (j == 20 || j == 22)
+                    {
+                        Console.WriteLine(equipos.Rows[i].Cells[j].Value);
+                        hojaTrabajo.Cells[i + 2, j + 1].NumberFormat = "dd/mm/aaaa";
+                        //hojaTrabajo.Cells[i + 2, j + 1].NumberFormat = "@";
+                        DateTime fecha_insertar = Convert.ToDateTime(equipos.Rows[i].Cells[j].Value);
+                        hojaTrabajo.Cells[i + 2, j + 1] = fecha_insertar;
+                    }
+                    else if (j == 25)
+                    {
+                        hojaTrabajo.Cells[i + 2, j + 1] = equipos.Rows[i].Cells[j+1].Value.ToString();
+                    }
+                    else
+                    {
+                        if (equipos.Rows[i].Cells[j].Value is null)
+                        {
+                            hojaTrabajo.Cells[i + 2, j + 1] = "";
+                        }
+                        else
+                        {
+                            hojaTrabajo.Cells[i + 2, j + 1] = equipos.Rows[i].Cells[j].Value.ToString();
+                        }
+                    }
+                }
+                cuenta += progreso;
+            }
+            aplicacion.ActiveWindow.DisplayGridlines= false;
+            librosTrabajo.SaveAs(fichero.FileName, XlFileFormat.xlWorkbookNormal);
+            librosTrabajo.Close(true);
             aplicacion.Quit();
         }
 
         private void Bwexcel_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            label12.Text = "Insertando " + suma + " de " + lista.Count + " registros";
+            label12.Text = "Insertando " + suma + " de " + equipos.Rows.Count + " registros";
             if (e.ProgressPercentage > 100)
             {
                 progressBar1.Value = 100;
@@ -726,5 +723,6 @@ namespace InfEq
             pictureBox1.Hide();
             progressBar1.Hide();
         }
+
     }
 }

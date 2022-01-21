@@ -63,6 +63,19 @@
             this.toolreset = new System.Windows.Forms.ToolTip(this.components);
             this.activo = new System.Windows.Forms.TextBox();
             this.equipos = new System.Windows.Forms.DataGridView();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.bwexcel = new System.ComponentModel.BackgroundWorker();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.reset = new System.Windows.Forms.Button();
+            this.regresar = new System.Windows.Forms.Button();
+            this.exportarexcel = new System.Windows.Forms.Button();
+            this.buscardetalle = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.mac = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.mtto2 = new System.Windows.Forms.ComboBox();
+            this.mttolabel = new System.Windows.Forms.Label();
             this.ids = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.noactivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombreequipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -89,19 +102,7 @@
             this.horatermino = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.observaciones1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.macaddress = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.bwexcel = new System.ComponentModel.BackgroundWorker();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.reset = new System.Windows.Forms.Button();
-            this.regresar = new System.Windows.Forms.Button();
-            this.exportarexcel = new System.Windows.Forms.Button();
-            this.buscardetalle = new System.Windows.Forms.Button();
-            this.label12 = new System.Windows.Forms.Label();
-            this.mac = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.mtto2 = new System.Windows.Forms.ComboBox();
-            this.mttolabel = new System.Windows.Forms.Label();
+            this.listamacs = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.equipos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -393,7 +394,8 @@
             "2018",
             "2019",
             "2020",
-            "2021"});
+            "2021",
+            "2022"});
             this.year.Location = new System.Drawing.Point(539, 106);
             this.year.Name = "year";
             this.year.Size = new System.Drawing.Size(162, 24);
@@ -451,7 +453,8 @@
             this.fechatermino1,
             this.horatermino,
             this.observaciones1,
-            this.macaddress});
+            this.macaddress,
+            this.listamacs});
             this.equipos.EnableHeadersVisualStyles = false;
             this.equipos.Location = new System.Drawing.Point(2, 134);
             this.equipos.Name = "equipos";
@@ -459,6 +462,135 @@
             this.equipos.Size = new System.Drawing.Size(1089, 432);
             this.equipos.TabIndex = 77;
             this.equipos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellContentClick);
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.WorkerReportsProgress = true;
+            this.backgroundWorker1.WorkerSupportsCancellation = true;
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker1_DoWork);
+            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.BackgroundWorker1_ProgressChanged);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackgroundWorker1_RunWorkerCompleted);
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(2, 543);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(1088, 23);
+            this.progressBar1.TabIndex = 78;
+            // 
+            // bwexcel
+            // 
+            this.bwexcel.WorkerReportsProgress = true;
+            this.bwexcel.WorkerSupportsCancellation = true;
+            this.bwexcel.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Bwexcel_DoWork);
+            this.bwexcel.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.Bwexcel_ProgressChanged);
+            this.bwexcel.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.Bwexcel_RunWorkerCompleted);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.Image = global::InfEq.Properties.Resources.DisgustingSpiffyIguana_small;
+            this.pictureBox1.Location = new System.Drawing.Point(399, 163);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(291, 283);
+            this.pictureBox1.TabIndex = 79;
+            this.pictureBox1.TabStop = false;
+            // 
+            // reset
+            // 
+            this.reset.Image = global::InfEq.Properties.Resources.reset4;
+            this.reset.Location = new System.Drawing.Point(1098, 154);
+            this.reset.Name = "reset";
+            this.reset.Size = new System.Drawing.Size(91, 79);
+            this.reset.TabIndex = 16;
+            this.reset.UseVisualStyleBackColor = true;
+            this.reset.Click += new System.EventHandler(this.Reset_Click);
+            // 
+            // regresar
+            // 
+            this.regresar.Image = global::InfEq.Properties.Resources.back1;
+            this.regresar.Location = new System.Drawing.Point(1097, 442);
+            this.regresar.Name = "regresar";
+            this.regresar.Size = new System.Drawing.Size(91, 79);
+            this.regresar.TabIndex = 18;
+            this.regresar.UseVisualStyleBackColor = true;
+            this.regresar.Click += new System.EventHandler(this.Regresar_Click);
+            // 
+            // exportarexcel
+            // 
+            this.exportarexcel.Image = global::InfEq.Properties.Resources.excel2;
+            this.exportarexcel.Location = new System.Drawing.Point(1098, 292);
+            this.exportarexcel.Name = "exportarexcel";
+            this.exportarexcel.Size = new System.Drawing.Size(91, 79);
+            this.exportarexcel.TabIndex = 17;
+            this.exportarexcel.UseVisualStyleBackColor = true;
+            this.exportarexcel.Click += new System.EventHandler(this.Exportarexcel_Click);
+            // 
+            // buscardetalle
+            // 
+            this.buscardetalle.Image = global::InfEq.Properties.Resources.search2;
+            this.buscardetalle.Location = new System.Drawing.Point(1097, 12);
+            this.buscardetalle.Name = "buscardetalle";
+            this.buscardetalle.Size = new System.Drawing.Size(91, 79);
+            this.buscardetalle.TabIndex = 15;
+            this.buscardetalle.UseVisualStyleBackColor = true;
+            this.buscardetalle.Click += new System.EventHandler(this.Buscardetalle_Click);
+            // 
+            // label12
+            // 
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(2, 490);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(1089, 34);
+            this.label12.TabIndex = 80;
+            this.label12.Text = "label12";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // mac
+            // 
+            this.mac.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.mac.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mac.Location = new System.Drawing.Point(880, 106);
+            this.mac.Name = "mac";
+            this.mac.Size = new System.Drawing.Size(210, 22);
+            this.mac.TabIndex = 81;
+            this.mac.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Mac_KeyDown);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(876, 86);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(98, 20);
+            this.label15.TabIndex = 82;
+            this.label15.Text = "MacAddress";
+            // 
+            // mtto2
+            // 
+            this.mtto2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mtto2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mtto2.FormattingEnabled = true;
+            this.mtto2.Items.AddRange(new object[] {
+            "NINGUNO",
+            "CORRECTIVO",
+            "PREVENTIVO",
+            "EQUIPO NUEVO",
+            "CAMBIO DE EQUIPO"});
+            this.mtto2.Location = new System.Drawing.Point(712, 106);
+            this.mtto2.Name = "mtto2";
+            this.mtto2.Size = new System.Drawing.Size(162, 24);
+            this.mtto2.TabIndex = 83;
+            // 
+            // mttolabel
+            // 
+            this.mttolabel.AutoSize = true;
+            this.mttolabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mttolabel.Location = new System.Drawing.Point(712, 86);
+            this.mttolabel.Name = "mttolabel";
+            this.mttolabel.Size = new System.Drawing.Size(114, 20);
+            this.mttolabel.TabIndex = 84;
+            this.mttolabel.Text = "Mantenimiento";
             // 
             // ids
             // 
@@ -622,134 +754,12 @@
             this.macaddress.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.macaddress.Text = "Ver Macs Address";
             // 
-            // backgroundWorker1
+            // listamacs
             // 
-            this.backgroundWorker1.WorkerReportsProgress = true;
-            this.backgroundWorker1.WorkerSupportsCancellation = true;
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker1_DoWork);
-            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.BackgroundWorker1_ProgressChanged);
-            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackgroundWorker1_RunWorkerCompleted);
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(2, 543);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(1088, 23);
-            this.progressBar1.TabIndex = 78;
-            // 
-            // bwexcel
-            // 
-            this.bwexcel.WorkerReportsProgress = true;
-            this.bwexcel.WorkerSupportsCancellation = true;
-            this.bwexcel.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Bwexcel_DoWork);
-            this.bwexcel.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.Bwexcel_ProgressChanged);
-            this.bwexcel.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.Bwexcel_RunWorkerCompleted);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Image = global::InfEq.Properties.Resources.DisgustingSpiffyIguana_small;
-            this.pictureBox1.Location = new System.Drawing.Point(399, 163);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(291, 283);
-            this.pictureBox1.TabIndex = 79;
-            this.pictureBox1.TabStop = false;
-            // 
-            // reset
-            // 
-            this.reset.Image = global::InfEq.Properties.Resources.reset4;
-            this.reset.Location = new System.Drawing.Point(1098, 154);
-            this.reset.Name = "reset";
-            this.reset.Size = new System.Drawing.Size(91, 79);
-            this.reset.TabIndex = 16;
-            this.reset.UseVisualStyleBackColor = true;
-            this.reset.Click += new System.EventHandler(this.Reset_Click);
-            // 
-            // regresar
-            // 
-            this.regresar.Image = global::InfEq.Properties.Resources.back1;
-            this.regresar.Location = new System.Drawing.Point(1097, 442);
-            this.regresar.Name = "regresar";
-            this.regresar.Size = new System.Drawing.Size(91, 79);
-            this.regresar.TabIndex = 18;
-            this.regresar.UseVisualStyleBackColor = true;
-            this.regresar.Click += new System.EventHandler(this.Regresar_Click);
-            // 
-            // exportarexcel
-            // 
-            this.exportarexcel.Image = global::InfEq.Properties.Resources.excel2;
-            this.exportarexcel.Location = new System.Drawing.Point(1098, 292);
-            this.exportarexcel.Name = "exportarexcel";
-            this.exportarexcel.Size = new System.Drawing.Size(91, 79);
-            this.exportarexcel.TabIndex = 17;
-            this.exportarexcel.UseVisualStyleBackColor = true;
-            this.exportarexcel.Click += new System.EventHandler(this.Exportarexcel_Click);
-            // 
-            // buscardetalle
-            // 
-            this.buscardetalle.Image = global::InfEq.Properties.Resources.search2;
-            this.buscardetalle.Location = new System.Drawing.Point(1097, 12);
-            this.buscardetalle.Name = "buscardetalle";
-            this.buscardetalle.Size = new System.Drawing.Size(91, 79);
-            this.buscardetalle.TabIndex = 15;
-            this.buscardetalle.UseVisualStyleBackColor = true;
-            this.buscardetalle.Click += new System.EventHandler(this.Buscardetalle_Click);
-            // 
-            // label12
-            // 
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(2, 490);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(1089, 34);
-            this.label12.TabIndex = 80;
-            this.label12.Text = "label12";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // mac
-            // 
-            this.mac.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.mac.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mac.Location = new System.Drawing.Point(880, 106);
-            this.mac.Name = "mac";
-            this.mac.Size = new System.Drawing.Size(210, 22);
-            this.mac.TabIndex = 81;
-            this.mac.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Mac_KeyDown);
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(876, 86);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(98, 20);
-            this.label15.TabIndex = 82;
-            this.label15.Text = "MacAddress";
-            // 
-            // mtto2
-            // 
-            this.mtto2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.mtto2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mtto2.FormattingEnabled = true;
-            this.mtto2.Items.AddRange(new object[] {
-            "NINGUNO",
-            "CORRECTIVO",
-            "PREVENTIVO",
-            "EQUIPO NUEVO",
-            "CAMBIO DE EQUIPO"});
-            this.mtto2.Location = new System.Drawing.Point(712, 106);
-            this.mtto2.Name = "mtto2";
-            this.mtto2.Size = new System.Drawing.Size(162, 24);
-            this.mtto2.TabIndex = 83;
-            // 
-            // mttolabel
-            // 
-            this.mttolabel.AutoSize = true;
-            this.mttolabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mttolabel.Location = new System.Drawing.Point(712, 86);
-            this.mttolabel.Name = "mttolabel";
-            this.mttolabel.Size = new System.Drawing.Size(114, 20);
-            this.mttolabel.TabIndex = 84;
-            this.mttolabel.Text = "Mantenimiento";
+            this.listamacs.HeaderText = "Lista Macs";
+            this.listamacs.Name = "listamacs";
+            this.listamacs.ReadOnly = true;
+            this.listamacs.Visible = false;
             // 
             // Buscar
             // 
@@ -856,6 +866,8 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox mac;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.ComboBox mtto2;
+        private System.Windows.Forms.Label mttolabel;
         private System.Windows.Forms.DataGridViewTextBoxColumn ids;
         private System.Windows.Forms.DataGridViewTextBoxColumn noactivo;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombreequipo;
@@ -882,7 +894,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn horatermino;
         private System.Windows.Forms.DataGridViewTextBoxColumn observaciones1;
         private System.Windows.Forms.DataGridViewButtonColumn macaddress;
-        private System.Windows.Forms.ComboBox mtto2;
-        private System.Windows.Forms.Label mttolabel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn listamacs;
     }
 }

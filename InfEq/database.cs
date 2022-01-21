@@ -23,8 +23,8 @@ namespace InfEq
         public static Boolean pruebas = false;
 
         //version del software
-        public static String versioninfeq = "3.17";
-        public static String versioninfeq_hash = "3b82211ba5fe14ec4a0c0ca74c158ad4";
+        public static String versioninfeq = "3.18";
+        public static String versioninfeq_hash = "5582ec67f3387575af023a75d7885424";
         public static Boolean sw_actualizado = true;
         public static Boolean sw_actualizado_error = false;
 
