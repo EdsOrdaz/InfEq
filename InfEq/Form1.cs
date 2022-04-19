@@ -42,6 +42,7 @@ namespace InfEq
         public Orden()
         {
             InitializeComponent();
+            AutoCompletar();
         }
         public static string EncriptarPass(string str)
         {
@@ -193,6 +194,9 @@ namespace InfEq
 
         private void Button3_Click(object sender, EventArgs e)
         {
+            VerMacs_boton vermacs = new VerMacs_boton();
+            vermacs.ShowDialog();
+            /*
             IPGlobalProperties computerProperties = IPGlobalProperties.GetIPGlobalProperties();
             NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
 
@@ -208,6 +212,7 @@ namespace InfEq
                 Mensaje = Mensaje + "Mac Address: "+mac+"\n\n";
             }
             MessageBox.Show(Mensaje, "Interfaces", MessageBoxButtons.OK);
+            */
         }
 
         private void PictureBox1_Click(object sender, EventArgs e)
@@ -617,6 +622,36 @@ namespace InfEq
         {
             double mint = -15;
             horainicio.Text = DateTime.Now.AddMinutes(mint).ToString("hh:mm tt", CultureInfo.InvariantCulture);
+        }
+
+        void AutoCompletar()
+        {
+            if (Buscar_Correo.empleados.Any())
+            {
+                AutoCompleteStringCollection lista_puesto = new AutoCompleteStringCollection();
+                foreach (String[] n in Buscar_Correo.empleados)
+                {
+                    lista_puesto.Add(n[3]);
+                }
+                usuario.AutoCompleteCustomSource = lista_puesto;
+            }
+        }
+
+        private void usuario_Leave(object sender, EventArgs e)
+        {
+            if(Buscar_Correo.empleados.Any())
+            {
+                foreach (String[] empleado in Buscar_Correo.empleados)
+                {
+                    if (empleado[3].ToUpper() == usuario.Text.ToUpper())
+                    {
+                        depa.Text = empleado[8];
+                        localidad.Text = empleado[7];
+                        correo.Text = empleado[6];
+                        namemachine.Text = empleado[4].ToUpper();
+                    }
+                }
+            }
         }
     }
 }

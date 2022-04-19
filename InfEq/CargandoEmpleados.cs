@@ -13,9 +13,13 @@ namespace InfEq
 {
     public partial class CargandoEmpleados : Form
     {
-        public CargandoEmpleados()
+        public CargandoEmpleados(Boolean inicio=false)
         {
             InitializeComponent();
+            if (inicio == true)
+            {
+                pictureBox1.Visible = false;
+            }
         }
 
         private void CargandoEmpleados_Load(object sender, EventArgs e)

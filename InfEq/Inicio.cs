@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -31,14 +32,15 @@ namespace InfEq
 
         private void Timer1_Tick(object sender, EventArgs e)
         {
+            Stopwatch sw = new Stopwatch(); // Creación del Stopwatch.
+            sw.Start(); // Iniciar la medición
             if (this.Opacity < 1.0)
             {
-                this.Opacity += 0.045;
+                this.Opacity += 0.065;
             }
             else
             {
                 timer1.Stop();
-
                 try
                 {
                     using (SqlConnection conexion2 = new SqlConnection(database.nombresqlexpress))
@@ -59,6 +61,10 @@ namespace InfEq
                                 //cargar datos de configuracion
                                 database.view_conf_correo_af = nwReader2["correo_af"].ToString();
                                 database.view_conf_correo_ti = nwReader2["correo_ti"].ToString();
+
+                                //Cargando Empleados
+                                CargandoEmpleados CargandoEmpleados = new CargandoEmpleados(true);
+                                CargandoEmpleados.ShowDialog();
                             }
                         }
                         else
@@ -77,6 +83,8 @@ namespace InfEq
                 Orden orden = new Orden();
                 orden.Show();
                 this.Hide();
+                sw.Stop(); // Detener la medición.
+                Console.WriteLine("Time elapsed: {0}", sw.Elapsed.ToString("hh\\:mm\\:ss\\.fff")); // Mostrar el tiempo transcurriodo con un formato hh:mm:ss.000
             }
         }
     }
