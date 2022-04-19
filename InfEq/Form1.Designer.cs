@@ -374,12 +374,15 @@
             // 
             // usuario
             // 
+            this.usuario.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.usuario.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.usuario.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.usuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.usuario.Location = new System.Drawing.Point(11, 324);
             this.usuario.Name = "usuario";
             this.usuario.Size = new System.Drawing.Size(516, 22);
             this.usuario.TabIndex = 7;
+            this.usuario.Leave += new System.EventHandler(this.usuario_Leave);
             // 
             // label15
             // 
