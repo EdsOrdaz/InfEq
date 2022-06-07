@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -6,6 +7,7 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Management;
 using System.Net;
 using System.Net.Mail;
 using System.Net.NetworkInformation;
@@ -38,10 +40,13 @@ namespace InfEq
         public static Boolean errorcorreo;
         public static Boolean enviarorden=false;
 
+        public static String usuario_inicio;
+
 
         public Orden()
         {
             InitializeComponent();
+            AutoCompletar();
         }
         public static string EncriptarPass(string str)
         {
@@ -88,6 +93,7 @@ namespace InfEq
             empresa.SelectedIndex = 0;
             observaciones.Text = "Sin Observaciones";
 
+            usuario_inicio = Data.Descripcion();
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -193,6 +199,9 @@ namespace InfEq
 
         private void Button3_Click(object sender, EventArgs e)
         {
+            VerMacs_boton vermacs = new VerMacs_boton();
+            vermacs.ShowDialog();
+            /*
             IPGlobalProperties computerProperties = IPGlobalProperties.GetIPGlobalProperties();
             NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
 
@@ -208,6 +217,7 @@ namespace InfEq
                 Mensaje = Mensaje + "Mac Address: "+mac+"\n\n";
             }
             MessageBox.Show(Mensaje, "Interfaces", MessageBoxButtons.OK);
+            */
         }
 
         private void PictureBox1_Click(object sender, EventArgs e)
@@ -514,6 +524,7 @@ namespace InfEq
             Application.Exit();
         }
 
+
         //Traer informacion de NOM
         private void PictureBox2_Click(object sender, EventArgs e)
         {
@@ -553,6 +564,26 @@ namespace InfEq
             }
         }
 
+        public static bool SetMachineName(string newName)
+        {
+            RegistryKey key = Registry.LocalMachine;
+
+            string activeComputerName = "SYSTEM\\CurrentControlSet\\Control\\ComputerName\\ActiveComputerName";
+            RegistryKey activeCmpName = key.CreateSubKey(activeComputerName);
+            activeCmpName.SetValue("ComputerName", newName);
+            activeCmpName.Close();
+            string computerName = "SYSTEM\\CurrentControlSet\\Control\\ComputerName\\ComputerName";
+            RegistryKey cmpName = key.CreateSubKey(computerName);
+            cmpName.SetValue("ComputerName", newName);
+            cmpName.Close();
+            string _hostName = "SYSTEM\\CurrentControlSet\\services\\Tcpip\\Parameters\\";
+            RegistryKey hostName = key.CreateSubKey(_hostName);
+            hostName.SetValue("Hostname", newName);
+            hostName.SetValue("NV Hostname", newName);
+            hostName.Close();
+            return true;
+        }
+
         public void Pic_pc_Click(object sender, EventArgs e)
         {
             if (database.EsAdministrador())
@@ -569,19 +600,28 @@ namespace InfEq
                 }
                 else
                 {
-                    this.Enabled = false;
-                    if (!Buscar_Correo.empleados.Any())
+                    try
                     {
-                        CargandoEmpleados CargandoEmpleados = new CargandoEmpleados();
-                        CargandoEmpleados.ShowDialog();
+                        ManagementObjectSearcher searcher = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM Win32_OperatingSystem");
+                        foreach (ManagementObject queryObj in searcher.Get())
+                        {
+                            queryObj["Description"] = usuario.Text;
+                            queryObj.Put();
+                        }
+
+                        Orden.namepc_2 = namemachine.Text;
+
+                        DialogResult msj = MessageBox.Show("Quieres cambiar los datos en el equipo?", "InfEq", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (msj == DialogResult.Yes)
+                        {
+                            SetMachineName(namemachine.Text.ToUpper());
+                            MessageBox.Show("Nombre del equipo cambiado", "InfEq", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                     }
-
-                    NombrePC nombrepcfrm = new NombrePC();
-                    nombrepcfrm.ShowDialog();
-
-                    this.Enabled = true;
-                    restablecer.PerformClick();
-                    PictureBox2_Click(sender, e);
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error al cambiar el nombre del equipo.\n\nERROR: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
             else
@@ -617,6 +657,61 @@ namespace InfEq
         {
             double mint = -15;
             horainicio.Text = DateTime.Now.AddMinutes(mint).ToString("hh:mm tt", CultureInfo.InvariantCulture);
+        }
+
+        void AutoCompletar()
+        {
+            if (Buscar_Correo.empleados.Any())
+            {
+                AutoCompleteStringCollection lista_puesto = new AutoCompleteStringCollection();
+                foreach (String[] n in Buscar_Correo.empleados)
+                {
+                    lista_puesto.Add(n[3]);
+                }
+                usuario.AutoCompleteCustomSource = lista_puesto;
+            }
+        }
+
+        private void usuario_Leave(object sender, EventArgs e)
+        {
+            if(Buscar_Correo.empleados.Any())
+            {
+                foreach (String[] empleado in Buscar_Correo.empleados)
+                {
+                    if (empleado[3].ToUpper() == usuario.Text.ToUpper())
+                    {
+                        depa.Text = empleado[8];
+                        localidad.Text = empleado[7];
+                        correo.Text = empleado[6];
+                        namemachine.Text = empleado[4].ToUpper();
+                    }
+                }
+            }
+
+            if(!usuario_inicio.Equals(usuario.Text))
+            {
+                try
+                {
+                    DialogResult msj = MessageBox.Show("Quieres cambiar el nombre del equipo?", "InfEq", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (msj == DialogResult.Yes)
+                    {
+                        ManagementObjectSearcher searcher = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM Win32_OperatingSystem");
+                        foreach (ManagementObject queryObj in searcher.Get())
+                        {
+                            queryObj["Description"] = usuario.Text;
+                            queryObj.Put();
+                        }
+
+                        Orden.namepc_2 = namemachine.Text;
+                        SetMachineName(namemachine.Text.ToUpper());
+                        MessageBox.Show("Nombre del equipo cambiado", "InfEq", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al cambiar el nombre del equipo.\n\nERROR: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }

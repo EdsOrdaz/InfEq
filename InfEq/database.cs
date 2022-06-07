@@ -22,9 +22,22 @@ namespace InfEq
          */
         public static Boolean pruebas = false;
 
+
+
+        /*
+V3.2.2
+- Se agrega opcion de cambiar el nombre del equipo con salir del campo usuario.
+V3.2.0
+- Se agrega opcion de autocomplementar en campo de usuario
+- Se agrega nuevo cuadro para poder ver las macs y copiarlas
+
+V3.18
+- Se agrega opcion de busqueda 2022
+- Se repara exportacion a excel
+        */
         //version del software
-        public static String versioninfeq = "3.18";
-        public static String versioninfeq_hash = "5582ec67f3387575af023a75d7885424";
+        public static String versioninfeq = "3.2.1";
+        public static String versioninfeq_hash = "65375eae0ef075b8303f3467513590ba51a6f231";
         public static Boolean sw_actualizado = true;
         public static Boolean sw_actualizado_error = false;
 
