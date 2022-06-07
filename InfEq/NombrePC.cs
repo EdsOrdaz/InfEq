@@ -84,5 +84,10 @@ namespace InfEq
                 MessageBox.Show("Debes seleccionar una linea para enviar el correo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void NombrePC_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

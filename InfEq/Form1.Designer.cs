@@ -96,11 +96,9 @@
             this.mttocorr = new System.Windows.Forms.RadioButton();
             this.eqnuevo = new System.Windows.Forms.RadioButton();
             this.cambioeq = new System.Windows.Forms.RadioButton();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pic_pc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.loginimagen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -339,7 +337,7 @@
             this.depa.Location = new System.Drawing.Point(11, 274);
             this.depa.Name = "depa";
             this.depa.Size = new System.Drawing.Size(165, 22);
-            this.depa.TabIndex = 1;
+            this.depa.TabIndex = 3;
             this.depa.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label13
@@ -359,7 +357,7 @@
             this.localidad.Location = new System.Drawing.Point(186, 274);
             this.localidad.Name = "localidad";
             this.localidad.Size = new System.Drawing.Size(165, 22);
-            this.localidad.TabIndex = 2;
+            this.localidad.TabIndex = 4;
             this.localidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label14
@@ -381,7 +379,7 @@
             this.usuario.Location = new System.Drawing.Point(11, 324);
             this.usuario.Name = "usuario";
             this.usuario.Size = new System.Drawing.Size(516, 22);
-            this.usuario.TabIndex = 7;
+            this.usuario.TabIndex = 1;
             this.usuario.Leave += new System.EventHandler(this.usuario_Leave);
             // 
             // label15
@@ -491,7 +489,7 @@
             this.empresa.Location = new System.Drawing.Point(362, 274);
             this.empresa.Name = "empresa";
             this.empresa.Size = new System.Drawing.Size(165, 24);
-            this.empresa.TabIndex = 3;
+            this.empresa.TabIndex = 5;
             // 
             // label23
             // 
@@ -509,7 +507,7 @@
             this.observaciones.Location = new System.Drawing.Point(11, 422);
             this.observaciones.Name = "observaciones";
             this.observaciones.Size = new System.Drawing.Size(516, 40);
-            this.observaciones.TabIndex = 4;
+            this.observaciones.TabIndex = 2;
             this.observaciones.Text = "";
             // 
             // fechainicio
@@ -563,14 +561,14 @@
             this.correo.Location = new System.Drawing.Point(11, 492);
             this.correo.Name = "correo";
             this.correo.Size = new System.Drawing.Size(246, 22);
-            this.correo.TabIndex = 5;
+            this.correo.TabIndex = 6;
             this.correo.DoubleClick += new System.EventHandler(this.correo_DoubleClick);
             // 
             // label22
             // 
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(30, 469);
+            this.label22.Location = new System.Drawing.Point(14, 469);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(140, 20);
             this.label22.TabIndex = 55;
@@ -725,22 +723,11 @@
             this.cambioeq.UseVisualStyleBackColor = true;
             this.cambioeq.Click += new System.EventHandler(this.cambioeq_Click);
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(11, 471);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(18, 17);
-            this.pictureBox2.TabIndex = 62;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Click += new System.EventHandler(this.PictureBox2_Click);
-            // 
             // Orden
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(534, 612);
-            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.cambioeq);
             this.Controls.Add(this.eqnuevo);
             this.Controls.Add(this.mttocorr);
@@ -810,7 +797,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pic_pc)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.loginimagen)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -884,7 +870,6 @@
         private System.Windows.Forms.RadioButton mttocorr;
         private System.Windows.Forms.RadioButton eqnuevo;
         private System.Windows.Forms.RadioButton cambioeq;
-        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
 
