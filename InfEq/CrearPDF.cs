@@ -1,7 +1,9 @@
 ﻿using InfEq.Properties;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using Microsoft.VisualBasic.CompilerServices;
 using System;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Net;
@@ -56,8 +58,6 @@ namespace InfEq
         public static String archivo;
         public static String guardardocumento;
         //public static String archivo = Data.Tipo() + "_" + Environment.MachineName.ToString() + "_" + Data.NumSerie() + ".pdf";
-
-
 
 
         public Stream GetStreamFile(string filePath)
@@ -432,7 +432,7 @@ namespace InfEq
 
 
 
-            
+
 
             iTextSharp.text.Image img9 = iTextSharp.text.Image.GetInstance(Resources.firma2, System.Drawing.Imaging.ImageFormat.Png);
             img9.ScalePercent(20f);
@@ -518,43 +518,85 @@ namespace InfEq
                 *      
                 */
 
-                MailAddress to = new MailAddress(Orden.correoelectronico);
-                MailAddress from = new MailAddress("mantenimiento.preventivo.unne@gmail.com", "Sistemas UNNE");
-
-                MailMessage message = new MailMessage(from, to);
-                message.Subject = "Mantenimiento Preventivo";
-                message.Body = "<p>Mantenimiento del equipo de computo realizado<br><br> " +
-                    "<b>Marca:</b> " + Orden.Marca +
-                    "<br><b>Modelo:</b> " + Orden.Modelo +
-                    "<br><b>Número de activo:</b> " + no_activo +
-                    "<br><b>Número de Serie:</b> " + Orden.NumerodeSerie +
-                    "<br><br><b><font color=red>Nota: Favor de no contestar a este correo</font></b></p>";
-
-                message.IsBodyHtml = true;
-                message.Attachments.Add(new Attachment(GetStreamFile(temparchivo + archivo), Path.GetFileName(temparchivo + archivo), "application/pdf"));
-                //message.Attachments.Add(new Attachment(temparchivo + archivo));)
-
-                SmtpClient client = new SmtpClient("smtp.gmail.com", 587)
-                {
-                    Credentials = new NetworkCredential("mantenimiento.preventivo.unne@gmail.com", "Unne2020"),
-                    EnableSsl = true
-                };
-                // code in brackets above needed if authentication required
+                
+                int NoDigits = 4;
+                Random rnd = new Random();
+                String nip = rnd.Next((int)Math.Pow(10, (NoDigits - 1)), (int)Math.Pow(10, NoDigits) - 1).ToString();
+                int mid = 0;
+                int xid = database.xid_nip;
 
                 try
                 {
-                    client.Send(message);
+                    using (SqlConnection conexion = new SqlConnection(database.nombresqlexpress))
+                    {
+                        /*
+                        conexion.Open();
+                        string sqlIns = "INSERT INTO " + database.tabla_mantenimientosprev + " (xid, nip, fecha_alta, estatus, tecnico, correo)" +
+                                " VALUES (@xid, @nip, @fecha_alta, @estatus, @tecnico, @correo)";
+                        SqlCommand cmdIns = new SqlCommand(sqlIns, conexion);
+                        cmdIns.Parameters.Add("@xid", xid);
+                        cmdIns.Parameters.Add("@nip", nip);
+                        cmdIns.Parameters.Add("@fecha_alta", DateTime.Now);
+                        cmdIns.Parameters.Add("@estatus", "0");
+                        cmdIns.Parameters.Add("@tecnico", database.useruid);
+                        cmdIns.Parameters.Add("@correo", Orden.correoelectronico);
+
+                        cmdIns.ExecuteNonQuery();
+                        cmdIns.Parameters.Clear();
+                        cmdIns.CommandText = "SELECT @@IDENTITY";
+
+                        mid = Convert.ToInt32(cmdIns.ExecuteScalar());
+
+                        cmdIns.Dispose();
+                        cmdIns = null;
+                        */
+                    }
+                }
+                catch(Exception error)
+                {
+                    MessageBox.Show("Error al guardar mantenimiento en la base de datos.\n\nMensaje: " + error.Message, "InfEq", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                
+                MailMessage mailMessage = new MailMessage();
+                MailAddressCollection to = mailMessage.To;
+                object[] obj = new object[1] { Orden.correoelectronico };
+                object[] array = obj;
+                bool[] obj2 = new bool[1] { true };
+                bool[] array2 = obj2;
+                NewLateBinding.LateCall(to, null, "Add", obj, null, null, obj2, IgnoreReturn: true);
+                mailMessage.Bcc.Add("mantenimento.preventivo@unne.com.mx");
+                mailMessage.From = new MailAddress("mantenimento.preventivo@unne.com.mx");
+                mailMessage.Subject = "Mantenimiento Preventivo";
+                mailMessage.Body = "<span style=\"font-family:Verdana; font-size: 10pt;\">Mantenimiento preventivo realizado" +
+                            "<br>Favor de ingresar a la siguiente liga para validar el mantenimiento realizado en su equipo de cómputo.<br>" +
+                            "<br><b>URL:</b> <a href=\"http://148.223.153.37:8086/" + mid + "/" + nip + "\">http://148.223.153.37:8086/" + mid + "</a>" +
+                            "<br><b>NIP:</b> " + nip +
+                            "</span><br><b>" +
+                            "<span style=\"font-family: Verdana; font-size: 9pt; color: #FF0000; \"><br><br> <b>Nota: Favor de <u>no</u> contestar a este correo</b></span>";
+                mailMessage.Attachments.Add(new Attachment(GetStreamFile(temparchivo + archivo), Path.GetFileName(temparchivo + archivo), "application/pdf"));
+                mailMessage.IsBodyHtml = true;
+                mailMessage.Priority = MailPriority.Normal;
+                SmtpClient smtpClient = new SmtpClient();
+                smtpClient.Host = "189.254.9.189";
+                smtpClient.Port = 587;
+                smtpClient.EnableSsl = false;
+                smtpClient.UseDefaultCredentials = false;
+                smtpClient.Credentials = new NetworkCredential("mpreventivo", "Corpame*2013");
+                try
+                {
+                    smtpClient.Send(mailMessage);
                     MessageBox.Show("Orden de trabajo enviada", "InfEq", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (SmtpException ex)
                 {
-                    Console.WriteLine(ex.ToString());
                     MessageBox.Show("Error al enviar orden de trabajo\n\nMensaje: " + ex.Message, "InfEq", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 /*
                 *  fin de envio
                 */
                 #endregion
+          
             }
 
             File.Delete(temparchivo + archivo);

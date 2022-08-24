@@ -1,16 +1,10 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Management;
-using System.Net;
-using System.Net.Mail;
-using System.Net.NetworkInformation;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
@@ -48,6 +42,7 @@ namespace InfEq
             InitializeComponent();
             AutoCompletar();
         }
+        
         public static string EncriptarPass(string str)
         {
             MD5 md5 = MD5CryptoServiceProvider.Create();
@@ -62,9 +57,8 @@ namespace InfEq
         private void Form1_Load(object sender, EventArgs e)
         {
             tooltipgenerarxml.SetToolTip(crearxml, "Generar archivo XML");
-            tooltiporden.SetToolTip(crearorden, "Generar orden del mantenimiento");
             tooltipsubir.SetToolTip(subirinfor, "Guardar la información del equipo en la base de datos");
-            tooltipvertabla.SetToolTip(vertabla, "Ver informacion de los equipos");
+            //tooltipvertabla.SetToolTip(vertabla, "Ver informacion de los equipos");
             tooltiprestablecer.SetToolTip(restablecer, "Restablecer campos");
             tooltiplogin.SetToolTip(loginimagen, "Iniciar Sesión");
 
@@ -99,10 +93,9 @@ namespace InfEq
         private void Button1_Click(object sender, EventArgs e)
         {
             crearxml.Enabled = false;
-            crearorden.Enabled = false;
             restablecer.Enabled = false;
             subirinfor.Enabled = false;
-            vertabla.Enabled = false;
+            //vertabla.Enabled = false;
             int error = 0;
             _ = string.IsNullOrEmpty(namemachine.Text) ? error++ : 0;
             _ = string.IsNullOrEmpty(ram.Text) ? error++ : 0;
@@ -147,23 +140,21 @@ namespace InfEq
                 {
                     xml.generar(namemachine.Text, marca.Text, modelo.Text, tipo.Text, ram.Text, ddtotal.Text, ddlibre.Text, so.Text, procesador.Text, 
                     arch.Text, serialnumber.Text, depa.Text, localidad.Text, usuario.Text, licenciaso.Text,empresa.Text, fechainicio.Text, fechatermino.Text,
-                    horainicio.Text, horatermino.Text, observaciones.Text, mantenimiento);
+                    horainicio.Text, horatermino.Text, observaciones.Text, mantenimiento, correo.Text);
                 }
             }
             restablecer.Enabled = true;
-            crearorden.Enabled = true;
             crearxml.Enabled = true;
-            vertabla.Enabled = true;
+            //vertabla.Enabled = true;
             subirinfor.Enabled = (database.botoncargar == true) ? true : false;
         }
 
         private void Button2_Click(object sender, EventArgs e)
         {
             crearxml.Enabled = false;
-            crearorden.Enabled = false;
             restablecer.Enabled = false;
             subirinfor.Enabled = false;
-            vertabla.Enabled = false;
+            //vertabla.Enabled = false;
 
 
             namemachine.Text = namepc_2;
@@ -191,9 +182,8 @@ namespace InfEq
 
             empresa.SelectedIndex = 0;
             restablecer.Enabled = true;
-            crearorden.Enabled = true;
             crearxml.Enabled = true;
-            vertabla.Enabled = true;
+            //vertabla.Enabled = true;
             subirinfor.Enabled = (database.botoncargar == true) ? true : false;
         }
 
@@ -227,6 +217,7 @@ namespace InfEq
             //MessageBox.Show("2019 © Edson Ordaz\n\nCorporativo UNNE\nTecnologías de la Informacón\nTodos los derechos reservados", "InfEq", MessageBoxButtons.OK);
         }
 
+        //BOTON DE CREAR PDF
         private void Button4_Click(object sender, EventArgs e)
         {
             int error = 0;
@@ -266,10 +257,9 @@ namespace InfEq
             else
             {
                 crearxml.Enabled = false;
-                crearorden.Enabled = false;
                 restablecer.Enabled = false;
                 subirinfor.Enabled = false;
-                vertabla.Enabled = false;
+                //vertabla.Enabled = false;
 
                 empresa2 = empresa.Text;
                 base2 = localidad.Text;
@@ -294,9 +284,8 @@ namespace InfEq
                 if (enviarorden == false)
                 {
                     restablecer.Enabled = true;
-                    crearorden.Enabled = true;
                     crearxml.Enabled = true;
-                    vertabla.Enabled = true;
+                    //vertabla.Enabled = true;
                     subirinfor.Enabled = (database.botoncargar == true) ? true : false;
                 }
                 this.Enabled = true;
@@ -315,142 +304,139 @@ namespace InfEq
 
         public void Button5_Click(object sender, EventArgs e)
         {
-            if (database.logueado == false)
+            crearxml.Enabled = false;
+            restablecer.Enabled = false;
+            subirinfor.Enabled = false;
+            //vertabla.Enabled = false;
+
+            int error = 0;
+            _ = string.IsNullOrEmpty(namemachine.Text) ? error++ : 0;
+            _ = string.IsNullOrEmpty(ram.Text) ? error++ : 0;
+            _ = string.IsNullOrEmpty(ddtotal.Text) ? error++ : 0;
+            _ = string.IsNullOrEmpty(ddlibre.Text) ? error++ : 0;
+            _ = string.IsNullOrEmpty(so.Text) ? error++ : 0;
+            _ = string.IsNullOrEmpty(procesador.Text) ? error++ : 0;
+            _ = string.IsNullOrEmpty(arch.Text) ? error++ : 0;
+            _ = string.IsNullOrEmpty(serialnumber.Text) ? error++ : 0;
+            _ = string.IsNullOrEmpty(modelo.Text) ? error++ : 0;
+            _ = string.IsNullOrEmpty(marca.Text) ? error++ : 0;
+            _ = string.IsNullOrEmpty(tipo.Text) ? error++ : 0;
+            _ = string.IsNullOrEmpty(depa.Text) ? error++ : 0;
+            _ = string.IsNullOrEmpty(localidad.Text) ? error++ : 0;
+            _ = string.IsNullOrEmpty(usuario.Text) ? error++ : 0;
+            _ = string.IsNullOrEmpty(fechainicio.Text) ? error++ : 0;
+            _ = string.IsNullOrEmpty(fechatermino.Text) ? error++ : 0;
+            _ = string.IsNullOrEmpty(horainicio.Text) ? error++ : 0;
+            _ = string.IsNullOrEmpty(horatermino.Text) ? error++ : 0;
+            _ = string.IsNullOrEmpty(observaciones.Text) ? error++ : 0;
+            _ = string.IsNullOrEmpty(correo.Text) ? error++ : 0;
+
+            String errormostrar = "No debe haber campos vacíos";
+
+            if (mttocorr.Checked == false && mttoprev.Checked == false && eqnuevo.Checked == false && cambioeq.Checked == false)
             {
-                login ventanalogin = new login();
-                database.ventanalogin = 2;
-                ventanalogin.Show();
+                error++;
+                errormostrar = "Debes seleccionar el tipo de mantenimiento";
+            }
+
+            if (error > 0)
+            {
+                MessageBox.Show(errormostrar, "Información del Equipo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                crearxml.Enabled = false;
-                crearorden.Enabled = false;
-                restablecer.Enabled = false;
-                subirinfor.Enabled = false;
-                vertabla.Enabled = false;
-
-                int error = 0;
-                _ = string.IsNullOrEmpty(namemachine.Text) ? error++ : 0;
-                _ = string.IsNullOrEmpty(ram.Text) ? error++ : 0;
-                _ = string.IsNullOrEmpty(ddtotal.Text) ? error++ : 0;
-                _ = string.IsNullOrEmpty(ddlibre.Text) ? error++ : 0;
-                _ = string.IsNullOrEmpty(so.Text) ? error++ : 0;
-                _ = string.IsNullOrEmpty(procesador.Text) ? error++ : 0;
-                _ = string.IsNullOrEmpty(arch.Text) ? error++ : 0;
-                _ = string.IsNullOrEmpty(serialnumber.Text) ? error++ : 0;
-                _ = string.IsNullOrEmpty(modelo.Text) ? error++ : 0;
-                _ = string.IsNullOrEmpty(marca.Text) ? error++ : 0;
-                _ = string.IsNullOrEmpty(tipo.Text) ? error++ : 0;
-                _ = string.IsNullOrEmpty(depa.Text) ? error++ : 0;
-                _ = string.IsNullOrEmpty(localidad.Text) ? error++ : 0;
-                _ = string.IsNullOrEmpty(usuario.Text) ? error++ : 0;
-                _ = string.IsNullOrEmpty(fechainicio.Text) ? error++ : 0;
-                _ = string.IsNullOrEmpty(fechatermino.Text) ? error++ : 0;
-                _ = string.IsNullOrEmpty(horainicio.Text) ? error++ : 0;
-                _ = string.IsNullOrEmpty(horatermino.Text) ? error++ : 0;
-                _ = string.IsNullOrEmpty(observaciones.Text) ? error++ : 0;
-
-                String errormostrar = "No debe haber campos vacíos";
-
-                if (mttocorr.Checked == false && mttoprev.Checked == false && eqnuevo.Checked == false && cambioeq.Checked == false)
+                if (database.logueado == false)
                 {
-                    error++;
-                    errormostrar = "Debes seleccionar el tipo de mantenimiento";
-                }
-
-                if (error > 0)
-                {
-                    MessageBox.Show(errormostrar, "Información del Equipo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                {
-                    DialogResult enviarcorreo = MessageBox.Show("Quieres enviar la orden por correo?", "InfEq", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (enviarcorreo == DialogResult.Yes)
+                    login ventanalogin = new login();
+                    database.ventanalogin = 2;
+                    ventanalogin.ShowDialog();
+                    if (database.logueado == false)
                     {
-                        enviarorden = true;
-                        Button4_Click(sender,e);
-                        if(errorcorreo == true)
+                        goto Terminar;
+                    }
+                }
+                if (!File.Exists("itextsharp.dll"))
+                {
+                    MessageBox.Show("No se pudo cargar la extension itextsharp.dll, agregala al directorio para poder cargar la informacón", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    goto Terminar;
+                }
+
+                this.Enabled = false;
+
+                CargandoDatos_a_BD CargandoDatos_a_BD = new CargandoDatos_a_BD();
+                CargandoDatos_a_BD.Show();
+                Boolean se_envio = false;
+                try
+                {
+                        //Validacion del tipo de mantenimiento (Corr:1, Prev:2 y EqNuevo:3
+                        int mantenimiento = 0;
+                        mantenimiento = (mttocorr.Checked == true) ? 1 : mantenimiento;
+                        mantenimiento = (mttoprev.Checked == true) ? 2 : mantenimiento;
+                        mantenimiento = (eqnuevo.Checked == true) ? 3 : mantenimiento;
+                        mantenimiento = (cambioeq.Checked == true) ? 4 : mantenimiento;
+
+                    /*
+                        database.Cargar(namemachine.Text, marca.Text, modelo.Text, tipo.Text, ram.Text, ddtotal.Text, ddlibre.Text, so.Text, procesador.Text,
+                                arch.Text, serialnumber.Text, depa.Text, localidad.Text, usuario.Text, licenciaso.Text, empresa.Text, fechainicio.Text, fechatermino.Text,
+                                horainicio.Text, horatermino.Text, observaciones.Text, mantenimiento);
+                    */
+                    se_envio = true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al cccconectar con la base de datos.\n\nMensaje: " + ex.Message, "Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                CargandoDatos_a_BD.Close();
+
+                if (se_envio)
+                {
+                    if (mttoprev.Checked == true)
+                    {
+                        //DATOS PARA ENVIAR EL CORREO
+                        empresa2 = empresa.Text;
+                        base2 = localidad.Text;
+                        depa2 = depa.Text;
+                        fecha_inicio = fechainicio.Text;
+                        fecha_termino = fechatermino.Text;
+                        hora_inicio = horainicio.Text;
+                        hora_termino = horatermino.Text;
+                        observaciones2 = observaciones.Text;
+                        correoelectronico = correo.Text;
+                        Usuario = usuario.Text;
+                        Tipo = tipo.Text;
+                        Marca = marca.Text;
+                        Modelo = modelo.Text;
+                        NumerodeSerie = serialnumber.Text;
+                        try
                         {
-                            restablecer.Enabled = true;
-                            crearorden.Enabled = true;
-                            crearxml.Enabled = true;
-                            vertabla.Enabled = true;
-                            subirinfor.Enabled = (database.botoncargar == true) ? true : false;
-                            return;
+                            CrearPDF.archivo = Data.Tipo() + "_" + Environment.MachineName.ToString() + "_" + Data.NumSerie() + ".pdf";
+                            CrearPDF imprimir = new CrearPDF();
+                            imprimir.ShowDialog();
                         }
-                        enviarorden = false;
-                    }
-                    this.Enabled = false;
-                    CargandoDatos_a_BD CargandoDatos_a_BD = new CargandoDatos_a_BD();
-                    CargandoDatos_a_BD.Show();
-                    try
-                    {
-                        database.xids.Clear();
-                        using (SqlConnection conexion = new SqlConnection(database.nombresqlexpress))
+                        catch(Exception ex)
                         {
-                            conexion.Open();
-                            String sql = "SELECT * FROM " + database.tablabase + " WHERE numeroserie='" + serialnumber.Text + "'";
-                            SqlCommand comm = new SqlCommand(sql, conexion);
-                            SqlDataReader nwReader = comm.ExecuteReader();
-
-                            Boolean repetidos = false;
-                            Repetido.paneladmin = false;
-                            int repe = 0;
-                            while (nwReader.Read())
-                            {
-                                repe++;
-                                repetidos = true;
-                                database.xids.Add(nwReader["xid"].ToString());
-                                //MessageBox.Show("ID encontrado " + nwReader["xid"], "Login", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
-
-
-                            //Validacion del tipo de mantenimiento (Corr:1, Prev:2 y EqNuevo:3
-                            int mantenimiento = 0;
-                            mantenimiento = (mttocorr.Checked == true) ? 1 : mantenimiento;
-                            mantenimiento = (mttoprev.Checked == true) ? 2 : mantenimiento;
-                            mantenimiento = (eqnuevo.Checked == true) ? 3 : mantenimiento;
-                            mantenimiento = (cambioeq.Checked == true) ? 4 : mantenimiento;
-
-                            if (repetidos==true)
-                            {
-                                MessageBox.Show("Se detectaron "+repe+" registros anteriores de este equipo.", "Información del Equipo", MessageBoxButtons.OK);
-                                Repetido ventanarepetido = new Repetido();
-                                ventanarepetido.cargardatos(namemachine.Text, marca.Text, modelo.Text, tipo.Text, ram.Text, ddtotal.Text, ddlibre.Text, so.Text, procesador.Text,
-                                    arch.Text, serialnumber.Text, depa.Text, localidad.Text, usuario.Text, licenciaso.Text, empresa.Text, fechainicio.Text, fechatermino.Text,
-                                    horainicio.Text, horatermino.Text, observaciones.Text, mantenimiento);
-                                ventanarepetido.Show();
-                            }
-                            else
-                            {
-                                database.Cargar(namemachine.Text, marca.Text, modelo.Text, tipo.Text, ram.Text, ddtotal.Text, ddlibre.Text, so.Text, procesador.Text,
-                                    arch.Text, serialnumber.Text, depa.Text, localidad.Text, usuario.Text, licenciaso.Text, empresa.Text, fechainicio.Text, fechatermino.Text,
-                                    horainicio.Text, horatermino.Text, observaciones.Text, mantenimiento);
-                            }
+                            MessageBox.Show(ex.Message);
                         }
+                        //TERMINA ENVIO DE CORREO
                     }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error al cccconectar con la base de datos.\n\nMensaje: " + ex.Message, "Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    CargandoDatos_a_BD.Close();
-                    this.Enabled = true;
                 }
+                this.Enabled = true;
             }
-            restablecer.Enabled = true;
-            crearorden.Enabled = true;
-            crearxml.Enabled = true;
-            vertabla.Enabled = true;
-            subirinfor.Enabled = (database.botoncargar == true) ? true : false;
+            Terminar:
+                restablecer.Enabled = true;
+                crearxml.Enabled = true;
+                //vertabla.Enabled = true;
+                subirinfor.Enabled = (database.botoncargar == true) ? true : false;
         }
 
+        //Boton Buscar
         private void Button6_Click(object sender, EventArgs e)
         {
             crearxml.Enabled = false;
-            crearorden.Enabled = false;
             restablecer.Enabled = false;
             subirinfor.Enabled = false;
-            vertabla.Enabled = false;
+            //vertabla.Enabled = false;
             if (database.logueado == false)
             {
                 login ventanalogin = new login();
@@ -471,9 +457,8 @@ namespace InfEq
                 }
             }
             restablecer.Enabled = true;
-            crearorden.Enabled = true;
             crearxml.Enabled = true;
-            vertabla.Enabled = true;
+            //vertabla.Enabled = true;
             subirinfor.Enabled = (database.botoncargar == true) ? true : false;
         }
 
@@ -683,6 +668,7 @@ namespace InfEq
                         depa.Text = empleado[8];
                         localidad.Text = empleado[7];
                         correo.Text = empleado[6];
+                        empresa.Text = empleado[9];
                         namemachine.Text = empleado[4].ToUpper();
                     }
                 }

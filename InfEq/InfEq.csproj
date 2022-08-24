@@ -25,8 +25,9 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationVersion>3.2.2.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -55,6 +56,21 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>AD6A655FEF10CA0101D114EC07107660DA99B21A</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>InfEq_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="GemBox.Document, Version=29.0.35.1167, Culture=neutral, PublicKeyToken=b1b72c69714d4847, processorArchitecture=MSIL">
@@ -157,6 +173,7 @@
       <HintPath>..\..\..\..\..\..\WINDOWS\assembly\GAC_MSIL\Microsoft.Office.Interop.Excel\15.0.0.0__71e9bce111e9429c\Microsoft.Office.Interop.Excel.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -311,24 +328,6 @@
     <Compile Include="Repetido.Designer.cs">
       <DependentUpon>Repetido.cs</DependentUpon>
     </Compile>
-    <Compile Include="ReporteMensual.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ReporteMensual.Designer.cs">
-      <DependentUpon>ReporteMensual.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ReportInfEq.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ReportInfEq.Designer.cs">
-      <DependentUpon>ReportInfEq.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Sirac.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Sirac.Designer.cs">
-      <DependentUpon>Sirac.cs</DependentUpon>
-    </Compile>
     <Compile Include="SubirArchivos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -430,15 +429,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Repetido.resx">
       <DependentUpon>Repetido.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ReporteMensual.resx">
-      <DependentUpon>ReporteMensual.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ReportInfEq.resx">
-      <DependentUpon>ReportInfEq.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Sirac.resx">
-      <DependentUpon>Sirac.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SubirArchivos.resx">
       <DependentUpon>SubirArchivos.cs</DependentUpon>

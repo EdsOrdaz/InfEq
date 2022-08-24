@@ -17,11 +17,17 @@ namespace InfEq
     {
         #region SQL
         //public static String select = "SELECT ltrim(rtrim(nombre)) as nombre, ltrim(rtrim(apepat)) as paterno, ltrim(rtrim(apemat)) as materno,email FROM [Nom2001].[dbo].[nomtrab] where status='A' ORDER BY Nombre asc";
+        /*
         public static String select = "SELECT ltrim(rtrim(nombre)) as nombre, ltrim(rtrim(apepat)) as paterno, ltrim(rtrim(apemat)) as materno,email, ISNULL(nompais.despai,'') AS [ubicacion],ISNULL(CC.desubi,'') AS [cc]" +
             "FROM nomtrab " +
             "LEFT JOIN nomubic CC ON nomtrab.cvepa2 = CC.cvepai AND nomtrab.cveci2 = CC.cveciu AND nomtrab.cvecia = CC.cvecia AND nomtrab.cveubi = CC.cveubi " +
             "LEFT JOIN nompais ON nomtrab.cvepa2 = nompais.cvepai AND nomtrab.cvecia = nompais.cvecia " +
             "WHERE nomtrab.status= 'A'";
+        */
+        public static String select = "SELECT Ltrim(Rtrim(nombre))       AS nombre,        Ltrim(Rtrim(apepat))       AS paterno,        Ltrim(Rtrim(apemat))       AS materno,        Isnull(nompais.despai, '') AS [ubicacion],        Isnull(CC.desubi, '')      AS [cc],        Ltrim(Rtrim(nomtrab.email)) AS email,        Ltrim(Rtrim(nomcias.descor)) AS empresa " +
+            "FROM   nomtrab        LEFT JOIN nomubic CC               ON nomtrab.cvepa2 = CC.cvepai                  AND nomtrab.cveci2 = CC.cveciu                  AND nomtrab.cvecia = CC.cvecia                  AND nomtrab.cveubi = CC.cveubi 	   LEFT JOIN nomcias               ON nomtrab.cvecia = nomcias.cvecia        " +
+            "LEFT JOIN nompais                ON nomtrab.cvepa2 = nompais.cvepai                  AND nomtrab.cvecia = nompais.cvecia " +
+            "WHERE  nomtrab.status = 'A' ";
         public static String conexionsql = "server=40.76.105.1,5055; database=Nom2001;User ID=reportesUNNE;Password=8rt=h!RdP9gVy; integrated security = false ; MultipleActiveResultSets=True";
         #endregion
 

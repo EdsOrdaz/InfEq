@@ -76,7 +76,7 @@ namespace InfEq
                             {
                                 database.privilegios = true;
                             }
-                            MessageBox.Show("Bienvenido " + nwReader["NombreCompleto"] + ".\nVuelve a intentar cargar la información.", "Login", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Bienvenido " + nwReader["NombreCompleto"], "Login", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         if (database.ventanalogin == 3)
                         {

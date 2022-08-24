@@ -44,7 +44,7 @@ namespace InfEq
                     SqlDataReader nwReader = comm.ExecuteReader();
                     while (nwReader.Read())
                     {
-                        String[] n = new String[9];
+                        String[] n = new String[10];
                         n[0] = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(nwReader["nombre"].ToString().ToLower());
                         n[1] = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(nwReader["paterno"].ToString().ToLower());
                         n[2] = (string.IsNullOrEmpty(nwReader["materno"].ToString())) ? "" : CultureInfo.CurrentCulture.TextInfo.ToTitleCase(nwReader["materno"].ToString().ToLower());
@@ -65,6 +65,7 @@ namespace InfEq
                         n[6] = nwReader["email"].ToString();
                         n[7] = nwReader["ubicacion"].ToString();
                         n[8] = nwReader["cc"].ToString();
+                        n[9] = nwReader["empresa"].ToString();
                         Buscar_Correo.empleados.Add(n);
                     }
                 }

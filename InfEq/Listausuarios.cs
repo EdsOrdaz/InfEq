@@ -38,7 +38,20 @@ namespace InfEq
                     String Estatus = "";
                     while (nwReader.Read())
                     {
-                        Privilegios = (Convert.ToInt32(nwReader["privilegios"]) == 1) ? "Administrador" : "Usuario";
+                        int priv = Convert.ToInt32(nwReader["privilegios"]);
+                        if (priv == 1)
+                        {
+                            Privilegios = "Administrador";
+                        }
+                        else if(priv == 2)
+                        {
+                            Privilegios = "Usuario";
+                        }
+                        else
+                        {
+                            Privilegios = "Estadia";
+                        }
+
                         Estatus = (nwReader["estatus"].ToString() == "A") ? "Activo" : "Desactivado";
                         usuarios.Rows.Add(nwReader["uid"], nwReader["Nombre"], nwReader["NombreCompleto"], Privilegios, Estatus);
                         if (nwReader["estatus"].ToString() == "B")

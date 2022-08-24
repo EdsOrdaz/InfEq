@@ -86,9 +86,7 @@
             this.ObtenerCorreo_NOM = new System.ComponentModel.BackgroundWorker();
             this.pic_pc = new System.Windows.Forms.PictureBox();
             this.loginimagen = new System.Windows.Forms.PictureBox();
-            this.vertabla = new System.Windows.Forms.Button();
             this.subirinfor = new System.Windows.Forms.Button();
-            this.crearorden = new System.Windows.Forms.Button();
             this.restablecer = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.crearxml = new System.Windows.Forms.Button();
@@ -606,44 +604,23 @@
             this.loginimagen.TabStop = false;
             this.loginimagen.Click += new System.EventHandler(this.Loginimagen_Click);
             // 
-            // vertabla
-            // 
-            this.vertabla.Image = global::InfEq.Properties.Resources.search2;
-            this.vertabla.Location = new System.Drawing.Point(328, 522);
-            this.vertabla.Name = "vertabla";
-            this.vertabla.Size = new System.Drawing.Size(91, 79);
-            this.vertabla.TabIndex = 15;
-            this.vertabla.UseVisualStyleBackColor = true;
-            this.vertabla.Click += new System.EventHandler(this.Button6_Click);
-            // 
             // subirinfor
             // 
             this.subirinfor.Image = global::InfEq.Properties.Resources.nube;
-            this.subirinfor.Location = new System.Drawing.Point(222, 522);
+            this.subirinfor.Location = new System.Drawing.Point(186, 522);
             this.subirinfor.Name = "subirinfor";
-            this.subirinfor.Size = new System.Drawing.Size(91, 79);
+            this.subirinfor.Size = new System.Drawing.Size(167, 79);
             this.subirinfor.TabIndex = 14;
             this.subirinfor.UseVisualStyleBackColor = true;
             this.subirinfor.Click += new System.EventHandler(this.Button5_Click);
-            // 
-            // crearorden
-            // 
-            this.crearorden.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.crearorden.Image = global::InfEq.Properties.Resources.sendemail;
-            this.crearorden.Location = new System.Drawing.Point(114, 522);
-            this.crearorden.Name = "crearorden";
-            this.crearorden.Size = new System.Drawing.Size(91, 79);
-            this.crearorden.TabIndex = 13;
-            this.crearorden.UseVisualStyleBackColor = true;
-            this.crearorden.Click += new System.EventHandler(this.Button4_Click);
             // 
             // restablecer
             // 
             this.restablecer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.restablecer.Image = global::InfEq.Properties.Resources.reset4;
-            this.restablecer.Location = new System.Drawing.Point(434, 522);
+            this.restablecer.Location = new System.Drawing.Point(365, 521);
             this.restablecer.Name = "restablecer";
-            this.restablecer.Size = new System.Drawing.Size(91, 79);
+            this.restablecer.Size = new System.Drawing.Size(164, 79);
             this.restablecer.TabIndex = 16;
             this.restablecer.UseVisualStyleBackColor = true;
             this.restablecer.Click += new System.EventHandler(this.Button2_Click);
@@ -663,10 +640,10 @@
             // 
             this.crearxml.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.crearxml.Image = global::InfEq.Properties.Resources.xml2;
-            this.crearxml.Location = new System.Drawing.Point(9, 522);
+            this.crearxml.Location = new System.Drawing.Point(11, 522);
             this.crearxml.Name = "crearxml";
             this.crearxml.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.crearxml.Size = new System.Drawing.Size(91, 79);
+            this.crearxml.Size = new System.Drawing.Size(167, 79);
             this.crearxml.TabIndex = 12;
             this.crearxml.UseVisualStyleBackColor = true;
             this.crearxml.Click += new System.EventHandler(this.Button1_Click);
@@ -677,7 +654,7 @@
             this.mttoprev.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mttoprev.Location = new System.Drawing.Point(273, 473);
             this.mttoprev.Name = "mttoprev";
-            this.mttoprev.Size = new System.Drawing.Size(88, 20);
+            this.mttoprev.Size = new System.Drawing.Size(87, 20);
             this.mttoprev.TabIndex = 58;
             this.mttoprev.TabStop = true;
             this.mttoprev.Text = "Mtto. Prev.";
@@ -690,7 +667,7 @@
             this.mttocorr.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mttocorr.Location = new System.Drawing.Point(273, 492);
             this.mttocorr.Name = "mttocorr";
-            this.mttocorr.Size = new System.Drawing.Size(85, 20);
+            this.mttocorr.Size = new System.Drawing.Size(84, 20);
             this.mttocorr.TabIndex = 59;
             this.mttocorr.TabStop = true;
             this.mttocorr.Text = "Mtto. Corr.";
@@ -703,7 +680,7 @@
             this.eqnuevo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.eqnuevo.Location = new System.Drawing.Point(370, 473);
             this.eqnuevo.Name = "eqnuevo";
-            this.eqnuevo.Size = new System.Drawing.Size(112, 20);
+            this.eqnuevo.Size = new System.Drawing.Size(111, 20);
             this.eqnuevo.TabIndex = 60;
             this.eqnuevo.TabStop = true;
             this.eqnuevo.Text = "Equipo Nuevo";
@@ -716,7 +693,7 @@
             this.cambioeq.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cambioeq.Location = new System.Drawing.Point(370, 492);
             this.cambioeq.Name = "cambioeq";
-            this.cambioeq.Size = new System.Drawing.Size(138, 20);
+            this.cambioeq.Size = new System.Drawing.Size(137, 20);
             this.cambioeq.TabIndex = 61;
             this.cambioeq.TabStop = true;
             this.cambioeq.Text = "Cambio de Equipo";
@@ -727,7 +704,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(534, 612);
+            this.ClientSize = new System.Drawing.Size(534, 603);
             this.Controls.Add(this.cambioeq);
             this.Controls.Add(this.eqnuevo);
             this.Controls.Add(this.mttocorr);
@@ -736,7 +713,6 @@
             this.Controls.Add(this.correo);
             this.Controls.Add(this.label22);
             this.Controls.Add(this.loginimagen);
-            this.Controls.Add(this.vertabla);
             this.Controls.Add(this.subirinfor);
             this.Controls.Add(this.horatermino);
             this.Controls.Add(this.horainicio);
@@ -745,7 +721,6 @@
             this.Controls.Add(this.observaciones);
             this.Controls.Add(this.label23);
             this.Controls.Add(this.empresa);
-            this.Controls.Add(this.crearorden);
             this.Controls.Add(this.label21);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.label19);
@@ -844,7 +819,6 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Button crearorden;
         private System.Windows.Forms.ComboBox empresa;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.RichTextBox observaciones;
@@ -853,7 +827,6 @@
         private System.Windows.Forms.DateTimePicker horainicio;
         private System.Windows.Forms.DateTimePicker horatermino;
         private System.Windows.Forms.Button subirinfor;
-        private System.Windows.Forms.Button vertabla;
         private System.Windows.Forms.ToolTip tooltipgenerarxml;
         private System.Windows.Forms.ToolTip tooltiporden;
         private System.Windows.Forms.ToolTip tooltipsubir;

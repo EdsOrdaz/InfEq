@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Security.Cryptography;
@@ -25,6 +26,9 @@ namespace InfEq
 
 
         /*
+V3.3
+- Se elimina el boton para buscar
+- Se asocia con tabla de mantenimientos preventivos
 V3.2.2
 - Se agrega opcion de cambiar el nombre del equipo con salir del campo usuario.
 V3.2.0
@@ -36,8 +40,8 @@ V3.18
 - Se repara exportacion a excel
         */
         //version del software
-        public static String versioninfeq = "3.2.1";
-        public static String versioninfeq_hash = "65375eae0ef075b8303f3467513590ba51a6f231";
+        public static String versioninfeq = "3.3";
+        public static String versioninfeq_hash = "fc6c5b058e749ca79b5fcf8644627ad49a8ab612";
         public static Boolean sw_actualizado = true;
         public static Boolean sw_actualizado_error = false;
 
@@ -62,6 +66,7 @@ V3.18
         public static String tablabasemacs = "MacAddress";
         public static String tablaconfiguracion = "Configuracion";
         public static String view_configuracion = "Config_InfEq";
+        public static String tabla_mantenimientosprev = "mprev";
 
         //Datos de Vista de configuracion (view_configuracion)
         public static String view_conf_correo_af;
@@ -108,6 +113,8 @@ V3.18
         public static Boolean usuario_en_xml = false;
         public static String usuario_en_xml_nombre = "";
 
+        //Guarda XID para generar NIP en mantenimiento preventivo
+        public static int xid_nip;
 
         public static String Buscar_economico(String noserie)
         {
@@ -144,7 +151,7 @@ V3.18
              * 
              */
 
-
+            xid_nip = 0;
             try
             {
                 using (SqlConnection conexion2 = new SqlConnection(database.nsqlExSirac))
@@ -312,6 +319,8 @@ V3.18
 
                     cmdIns.Dispose();
                     cmdIns = null;
+
+                    xid_nip = insertID;
 
                     usuario_en_xml = false;
                     MessageBox.Show("Información cargada correctamente.\n\nId de la información: "+ insertID, "Error al cargar", MessageBoxButtons.OK, MessageBoxIcon.Information);

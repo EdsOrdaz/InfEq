@@ -24,6 +24,18 @@ namespace InfEq
 
         private void Guardar_Click(object sender, EventArgs e)
         {
+            int priv = 0;
+            if(privilegios.Text == "Administrador")
+            {
+                priv = 1;
+            }else if(privilegios.Text == "Usuario")
+            {
+                priv = 2;
+            }
+            else
+            {
+                priv = 3;
+            }
             try
             {
                 //String nombresqlexpress = "server=" + servidor + "; database=" + basededatos + " ; integrated security = true ; MultipleActiveResultSets=True";

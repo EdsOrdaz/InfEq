@@ -33,7 +33,20 @@ namespace InfEq
                         usuario.Text = nwReader["Nombre"].ToString();
                         nombre.Text = nwReader["NombreCompleto"].ToString();
                         //password.Text = nwReader["Password"].ToString();
-                        privilegios.SelectedIndex = ((int)nwReader["Privilegios"] == 1) ? 0 : 1;
+
+                        if((int)nwReader["Privilegios"]==1)
+                        {
+                            privilegios.SelectedIndex = 0;
+                        }
+                        else if((int)nwReader["Privilegios"]==2)
+                        {
+                            privilegios.SelectedIndex = 1;
+                        }
+                        else
+                        {
+                            privilegios.SelectedIndex = 2;
+                        }
+
                         estatus.SelectedIndex = (nwReader["Estatus"].ToString() == "A") ? 0 : 1;
                     }
                 }
@@ -84,7 +97,20 @@ namespace InfEq
                         return;
                     }
 
-                    int Privilegios = (privilegios.Text == "Administrador") ? 1 : 2;
+                    int Privilegios = 0;
+                    if (privilegios.Text == "Administrador")
+                    {
+                        Privilegios = 1;
+                    }
+                    else if (privilegios.Text == "Usuario")
+                    {
+                        Privilegios = 2;
+                    }
+                    else
+                    {
+                        Privilegios = 3;
+                    }
+
                     //No quitar Permisos a Administrador de sistema
                     Privilegios = (uid.Text == "1") ? 1 : Privilegios;
 

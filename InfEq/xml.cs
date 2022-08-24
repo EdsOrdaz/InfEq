@@ -13,7 +13,7 @@ namespace InfEq
     {
         public static string generar(String NM,String Marca, String Modelo, String Tipo, String Ram, String ddt, String ddl, String so, String procesador, 
                                      String arquitectura, String numserie, String Depa, String localidad, String Usuario, String licenciaso, String empresa,
-                                     String fechainicio, String fechatermino, String horainicio, String horatermino, String observaciones, int mantenimiento)
+                                     String fechainicio, String fechatermino, String horainicio, String horatermino, String observaciones, int mantenimiento, String correo)
         {
             String archivo = Data.Tipo() + "_" + NM + "_" + DateTime.Now.ToString("yyyyMMdd_hhmmss", CultureInfo.InvariantCulture) + ".xml";
 
@@ -92,6 +92,8 @@ namespace InfEq
 
                     writer.WriteElementString("Observaciones", observaciones);
                     writer.WriteElementString("Mantenimiento", mantenimiento.ToString());
+
+                    writer.WriteElementString("correo", correo);
 
                     writer.WriteEndElement();
 

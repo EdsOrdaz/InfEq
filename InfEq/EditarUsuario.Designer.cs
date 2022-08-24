@@ -146,7 +146,8 @@
             this.privilegios.FormattingEnabled = true;
             this.privilegios.Items.AddRange(new object[] {
             "Administrador",
-            "Usuario"});
+            "Usuario",
+            "Estadia"});
             this.privilegios.Location = new System.Drawing.Point(88, 131);
             this.privilegios.Name = "privilegios";
             this.privilegios.Size = new System.Drawing.Size(276, 24);
