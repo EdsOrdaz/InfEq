@@ -127,80 +127,50 @@ namespace InfEq
             this.Enabled = false;
             descargar = false;
 
-            MessageBoxManager.Yes = "Enviar";
-            MessageBoxManager.No = "Descargar";
-            MessageBoxManager.Register();
-
-            DialogResult msg = MessageBox.Show("¿Quieres enviar o descargar la orden de mantenimiento?", "Orden", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-
-            MessageBoxManager.Unregister();
-
-            if (msg == DialogResult.Yes || msg == DialogResult.No)
+            if (!String.IsNullOrEmpty(correo.Text))
             {
-                if (!String.IsNullOrEmpty(correo.Text))
+                try
                 {
-                    try
+                    using (SqlConnection conexion = new SqlConnection(database.nombresqlexpress))
                     {
-                        using (SqlConnection conexion = new SqlConnection(database.nombresqlexpress))
+                        conexion.Open();
+                        String sql = "SELECT * FROM " + database.tablabase + " WHERE XID='" + Buscar.ID + "'";
+                        SqlCommand comm = new SqlCommand(sql, conexion);
+                        SqlDataReader nwReader = comm.ExecuteReader();
+                        while (nwReader.Read())
                         {
-                            conexion.Open();
-                            String sql = "SELECT * FROM " + database.tablabase + " WHERE XID='" + Buscar.ID + "'";
-                            SqlCommand comm = new SqlCommand(sql, conexion);
-                            SqlDataReader nwReader = comm.ExecuteReader();
-                            while (nwReader.Read())
-                            {
-                                Orden.Usuario = nwReader["nombre"].ToString();
-                                Orden.empresa2 = nwReader["empresa"].ToString();
-                                Orden.base2 = nwReader["base"].ToString();
-                                Orden.depa2 = nwReader["departamento"].ToString();
-                                Orden.Tipo = nwReader["tipo"].ToString();
-                                Orden.Marca = nwReader["marca"].ToString();
-                                Orden.Modelo = nwReader["modelo"].ToString();
-                                Orden.NumerodeSerie = nwReader["numeroserie"].ToString();
-                                Orden.fecha_inicio = nwReader["fechainicio"].ToString();
-                                Orden.hora_inicio = nwReader["horainicio"].ToString();
-                                Orden.fecha_termino = nwReader["fechatermino"].ToString();
-                                Orden.hora_termino = nwReader["horatermino"].ToString();
-                                Orden.observaciones2 = nwReader["observaciones"].ToString();
-                                Orden.correoelectronico = correo.Text;
-                                CorreoCampo = correo.Text;
+                            Orden.Usuario = nwReader["nombre"].ToString();
+                            Orden.empresa2 = nwReader["empresa"].ToString();
+                            Orden.base2 = nwReader["base"].ToString();
+                            Orden.depa2 = nwReader["departamento"].ToString();
+                            Orden.Tipo = nwReader["tipo"].ToString();
+                            Orden.Marca = nwReader["marca"].ToString();
+                            Orden.Modelo = nwReader["modelo"].ToString();
+                            Orden.NumerodeSerie = nwReader["numeroserie"].ToString();
+                            Orden.fecha_inicio = nwReader["fechainicio"].ToString();
+                            Orden.hora_inicio = nwReader["horainicio"].ToString();
+                            Orden.fecha_termino = nwReader["fechatermino"].ToString();
+                            Orden.hora_termino = nwReader["horatermino"].ToString();
+                            Orden.observaciones2 = nwReader["observaciones"].ToString();
+                            Orden.correoelectronico = correo.Text;
+                            CorreoCampo = correo.Text;
 
 
-                                CrearPDF.archivo = nwReader["tipo"].ToString() + "_" + nwReader["nombreequipo"].ToString() + "_" + nwReader["numeroserie"].ToString() + ".pdf";
+                            CrearPDF.archivo = nwReader["tipo"].ToString() + "_" + nwReader["nombreequipo"].ToString() + "_" + nwReader["numeroserie"].ToString() + ".pdf";
 
-                                if (msg == DialogResult.No)
-                                {
-                                    descargar = true;
-                                    SaveFileDialog sf = new SaveFileDialog();
-                                    sf.FileName = CrearPDF.archivo;
-                                    sf.DefaultExt = "pdf";
-                                    sf.Filter = "Pdf Files|*.pdf";
-                                    sf.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-
-                                    if (sf.ShowDialog() == DialogResult.OK)
-                                    {
-                                        CrearPDF.guardardocumento = sf.FileName;
-                                    }
-                                    else
-                                    {
-                                        MessageBox.Show("Debes seleccionar una ruta para guardar el documento.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                        goto Saltar;
-                                    }
-                                }
-                                CrearPDF imprimir = new CrearPDF();
-                                imprimir.ShowDialog();
-                            }
+                            CrearPDF imprimir = new CrearPDF();
+                            imprimir.ShowDialog();
                         }
                     }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error al enviar correo\n\nMensaje: " + ex.Message, "Información del Equipo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Debes ingresar un correo electronico", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Error al enviar correo\n\nMensaje: " + ex.Message, "Información del Equipo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+            else
+            {
+                MessageBox.Show("Debes ingresar un correo electronico", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         Saltar:
             this.Enabled = true;
