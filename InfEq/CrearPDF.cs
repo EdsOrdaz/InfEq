@@ -529,7 +529,6 @@ namespace InfEq
                 {
                     using (SqlConnection conexion = new SqlConnection(database.nombresqlexpress))
                     {
-                        /*
                         conexion.Open();
                         string sqlIns = "INSERT INTO " + database.tabla_mantenimientosprev + " (xid, nip, fecha_alta, estatus, tecnico, correo)" +
                                 " VALUES (@xid, @nip, @fecha_alta, @estatus, @tecnico, @correo)";
@@ -549,7 +548,6 @@ namespace InfEq
 
                         cmdIns.Dispose();
                         cmdIns = null;
-                        */
                     }
                 }
                 catch(Exception error)
