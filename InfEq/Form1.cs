@@ -357,7 +357,7 @@ namespace InfEq
                 }
                 if (!File.Exists("itextsharp.dll"))
                 {
-                    MessageBox.Show("No se pudo cargar la extension itextsharp.dll, agregala al directorio para poder cargar la informacón", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("No se pudo cargar la extension itextsharp.dll, agregala al directorio para poder cargar la información", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     goto Terminar;
                 }
 
@@ -375,11 +375,9 @@ namespace InfEq
                         mantenimiento = (eqnuevo.Checked == true) ? 3 : mantenimiento;
                         mantenimiento = (cambioeq.Checked == true) ? 4 : mantenimiento;
 
-                    /*
                         database.Cargar(namemachine.Text, marca.Text, modelo.Text, tipo.Text, ram.Text, ddtotal.Text, ddlibre.Text, so.Text, procesador.Text,
                                 arch.Text, serialnumber.Text, depa.Text, localidad.Text, usuario.Text, licenciaso.Text, empresa.Text, fechainicio.Text, fechatermino.Text,
                                 horainicio.Text, horatermino.Text, observaciones.Text, mantenimiento);
-                    */
                     se_envio = true;
                 }
                 catch (Exception ex)
