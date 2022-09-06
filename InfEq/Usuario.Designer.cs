@@ -44,6 +44,7 @@
             this.agregarusuario = new System.Windows.Forms.Button();
             this.listausuario = new System.Windows.Forms.Button();
             this.config_correo = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // delete
@@ -96,11 +97,22 @@
             this.config_correo.UseVisualStyleBackColor = true;
             this.config_correo.Click += new System.EventHandler(this.config_correo_Click);
             // 
+            // button1
+            // 
+            this.button1.Image = global::InfEq.Properties.Resources.search2;
+            this.button1.Location = new System.Drawing.Point(120, 95);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(91, 79);
+            this.button1.TabIndex = 10;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Usuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(335, 185);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.config_correo);
             this.Controls.Add(this.delete);
             this.Controls.Add(this.cerrarsesion);
@@ -133,5 +145,6 @@
         private System.Windows.Forms.Button delete;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button config_correo;
+        private System.Windows.Forms.Button button1;
     }
 }

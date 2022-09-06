@@ -125,5 +125,19 @@ namespace InfEq
                 configurarcorreo.Show();
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Form frm = Application.OpenForms.Cast<Form>().FirstOrDefault(x => x is Buscar);
+            if (frm != null)
+            {
+                frm.BringToFront();
+            }
+            else
+            {
+                Buscar Buscar = new Buscar();
+                Buscar.Show();
+            }
+        }
     }
 }
